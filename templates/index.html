@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Resume ATS Score Checker</h2>
+                <p class="text-center text-muted mb-4">
+                    Upload your resume and get an instant ATS compatibility score with detailed feedback
+                </p>
+
+                <form action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <label for="resume" class="form-label">Upload Resume</label>
+                        <input class="form-control" type="file" id="resume" name="resume" accept=".pdf,.docx,.txt" required>
+                        <div class="form-text">Supported formats: PDF, DOCX, TXT (Max 16MB)</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="job_description" class="form-label">Job Description</label>
+                        <textarea class="form-control" id="job_description" name="job_description" rows="6" placeholder="Paste the job description here..." required></textarea>
+                        <div class="form-text">Enter the job description you want to match your resume against</div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">Analyze Resume</button>
+                    </div>
+                </form>
+
+                <div class="mt-5 pt-4 border-top">
+                    <h5>How it works:</h5>
+                    <ol class="text-start">
+                        <li>Upload your resume (PDF, DOCX, or TXT format)</li>
+                        <li>Paste the job description you're targeting</li>
+                        <li>Get an instant ATS compatibility score (0-100%)</li>
+                        <li>Receive detailed feedback on missing keywords, strengths, and improvement suggestions</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Analysis Results</h2>
+
+                <div class="score-display">
+                    <span class="{% if results.score >= 80 %}score-excellent{% elif results.score >= 60 %}score-good{% else %}score-needs-work{% endif %}">
+                        {{ results.score }}%
+                    </span>
+                </div>
+
+                <p class="text-center text-muted mb-4">
+                    ATS Compatibility Score
+                </p>
+
+                {% if results.score >= 80 %}
+                <div class="alert alert-success">
+                    <strong>Excellent match!</strong> Your resume strongly aligns with the job description.
+                </div>
+                {% elif results.score >= 60 %}
+                <div class="alert alert-info">
+                    <strong>Good match!</strong> Your resume shows good alignment with some room for improvement.
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    <strong>Needs improvement</strong> Consider optimizing your resume for better ATS compatibility.
+                </div>
+                {% endif %}
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">Missing Keywords</h5>
+                            </div>
+                            <div class="card-body">
+                                {% if results.missing_keywords %}
+                                <ul class="list-unstyled">
+                                    {% for keyword in results.missing_keywords %}
+                                    <li class="list-item">{{ keyword }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% else %}
+                                <p class="text-muted">No significant missing keywords identified.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">Strengths</h5>
+                            </div>
+                            <div class="card-body">
+                                {% if results.strengths %}
+                                <ul class="list-unstyled">
+                                    {% for strength in results.strengths %}
+                                    <li class="list-item">{{ strength }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% else %}
+                                <p class="text-muted">No specific strengths identified.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-warning text-white">
+                                <h5 class="mb-0">Improvement Suggestions</h5>
+                            </div>
+                            <div class="card-body">
+                                {% if results.suggestions %}
+                                <ul class="list-unstyled">
+                                    {% for suggestion in results.suggestions %}
+                                    <li class="list-item">{{ suggestion }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% else %}
+                                <p class="text-muted">No specific suggestions provided.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-secondary text-white">
+                                <h5 class="mb-0">Weaknesses/Gaps</h5>
+                            </div>
+                            <div class="card-body">
+                                {% if results.weaknesses %}
+                                <ul class="list-unstyled">
+                                    {% for weakness in results.weaknesses %}
+                                    <li class="list-item">{{ weakness }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% else %}
+                                <p class="text-muted">No significant weaknesses identified.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Detailed Feedback</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ results.detailed_feedback }}</p>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-primary">Analyze Another Resume</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
