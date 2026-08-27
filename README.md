@@ -1,3 +1,4 @@
+HEAD
 # Resume ATS Score Checker
 
 A web application that analyzes resumes against job descriptions and provides an ATS compatibility score with detailed feedback. Developed by **Vikram TRIVIKRAM**.
@@ -107,3 +108,6 @@ For questions or suggestions, please open an issue on GitHub.
 --- 
 
 **Note**: This application uses the Anthropic Claude API. You need to obtain an API key from Anthropic to use this application.
+=======
+# resume-ats-checker
+3e80071436e7418e150f4be49821d8b53722922b
